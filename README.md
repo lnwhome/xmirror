@@ -1,4 +1,13 @@
-0. System configuration
+XMirror
+=======
+
+XMirror creates virtual work space. All applications that run under X Window System are displayed in virtual world.
+Windows can be dragged(shift-f) and place anywhere in VR. Application focus is set by just looking at the application.
+Unwanted applications can be put(shift-b) on black-list and are not rendered.
+
+System configuration
+--------------------
+
 OS: Ubuntu 17.04
 graphic: GTX1080
 HMD: Oculus Rift CV1
@@ -9,9 +18,12 @@ These are mendatory options:
     Option         "AllowEmptyInitialConfiguration" "true"
     Option         "ConnectedMonitor" "DP-5,HDMI-0"
 "
-Screen 0 shows ubuntu desktop, screen 1 is used by HMD.
+Screen "0.0" is used by applications. The 2nd screen "0.1" shall be used only by HMD.
+NOTE The 1st screen name is hard-coded in source. See XServerMirror.cpp and Xinput.h.
 
-1. Build
+Build
+-----
+
 The following packages are needed plus OpenHMD
 
 sudo apt-get install cmake
@@ -39,11 +51,12 @@ mkdir build
 cd build
 cmake ../ && make -j32
 
+Run
+---
 
-2. Run
 FYI: The app will call xrandr as follow in order to configure HMD
 "xrandr --screen 1 --output HDMI-0 --auto". Make sure HMD is on HDMI-0.
 
-
 DISPLAY=:0.1 ./server
 
+NOTE: Depending on X configuration you may need to set DISPLAY differently.
